@@ -1,0 +1,290 @@
+!-Generator IDFEditor 1.50
+!-Option SortedOrder UseSpecialFormat
+
+!-NOTE: All comments with '!-' are ignored by the IDFEditor and are generated automatically.
+!-      Use '!' comments if they need to be retained when using the IDFEditor.
+
+
+!-   ===========  ALL OBJECTS IN CLASS: VERSION ===========
+
+Version,9.0;
+
+!-   ===========  ALL OBJECTS IN CLASS: SIMULATIONCONTROL ===========
+
+
+SimulationControl,
+    No,                      !- Do Zone Sizing Calculation
+    No,                      !- Do System Sizing Calculation
+    No,                      !- Do Plant Sizing Calculation
+    No,                      !- Run Simulation for Sizing Periods
+    Yes,                     !- Run Simulation for Weather File Run Periods
+    No;                      !- Do HVAC Sizing Simulation for Sizing Periods
+
+
+!-   ===========  ALL OBJECTS IN CLASS: BUILDING ===========
+
+Building,
+    1zone_no_window,         !- Name
+    0,                       !- North Axis {deg}
+    City,                    !- Terrain
+    0.04,                    !- Loads Convergence Tolerance Value
+    0.004,                   !- Temperature Convergence Tolerance Value {deltaC}
+    MinimalShadowing,        !- Solar Distribution
+    30,                      !- Maximum Number of Warmup Days
+    6;                       !- Minimum Number of Warmup Days
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SURFACECONVECTIONALGORITHM:INSIDE ===========
+
+SurfaceConvectionAlgorithm:Inside,TARP;
+
+!-   ===========  ALL OBJECTS IN CLASS: SURFACECONVECTIONALGORITHM:OUTSIDE ===========
+
+SurfaceConvectionAlgorithm:Outside,DOE-2;
+
+!-   ===========  ALL OBJECTS IN CLASS: HEATBALANCEALGORITHM ===========
+
+HeatBalanceAlgorithm,ConductionTransferFunction;
+
+!-   ===========  ALL OBJECTS IN CLASS: TIMESTEP ===========
+
+Timestep,2;
+
+!-   ===========  ALL OBJECTS IN CLASS: RUNPERIOD ===========
+
+
+RunPeriod,
+    ,                        !- Name
+    1,                       !- Begin Month
+    1,                       !- Begin Day of Month
+    2017,                    !- Begin Year
+    12,                      !- End Month
+    31,                      !- End Day of Month
+    2017,                    !- End Year
+    ,                        !- Day of Week for Start Day
+    Yes,                     !- Use Weather File Holidays and Special Days
+    Yes,                     !- Use Weather File Daylight Saving Period
+    No,                      !- Apply Weekend Holiday Rule
+    Yes,                     !- Use Weather File Rain Indicators
+    Yes;                     !- Use Weather File Snow Indicators
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SCHEDULETYPELIMITS ===========
+
+ScheduleTypeLimits,
+    hvac_generic,            !- Name
+    0,                       !- Lower Limit Value
+    1,                       !- Upper Limit Value
+    DISCRETE;                !- Numeric Type
+
+
+!-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:CONSTANT ===========
+
+Schedule:Constant,hvac_generic,hvac_generic,1.0;
+
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL ===========
+
+
+Material,
+    validation_wall_material,!- Name
+    MediumRough,             !- Roughness
+    0.1,                     !- Thickness {m}
+    0.0436497,               !- Conductivity {W/m-K}
+    22.42585,                !- Density {kg/m3}
+    836.8,                   !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+Material,
+    validation_roof_material,!- Name
+    MediumRough,             !- Roughness
+    0.1,                     !- Thickness {m}
+    0.0183284,               !- Conductivity {W/m-K}
+    22.42585,                !- Density {kg/m3}
+    836.8,                   !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+Material,
+    validation_floor_material,  !- Name
+    MediumRough,             !- Roughness
+    0.1014984,               !- Thickness {m}
+    1.729577,                !- Conductivity {W/m-K}
+    2242.585,                !- Density {kg/m3}
+    836.8000,                !- Specific Heat {J/kg-K}
+    0.9000000,               !- Thermal Absorptance
+    0.6500000,               !- Solar Absorptance
+    0.6500000;               !- Visible Absorptance
+
+
+!-   ===========  ALL OBJECTS IN CLASS: CONSTRUCTION ===========
+
+Construction,
+    validation_wall_no_mass, !- Name
+    validation_wall_material;!- Outside Layer
+
+Construction,
+    validation_floor,        !- Name
+    validation_floor_material;  !- Outside Layer
+
+Construction,
+    validation_roof_no_mass, !- Name
+    validation_roof_material;!- Outside Layer
+
+
+!-   ===========  ALL OBJECTS IN CLASS: GLOBALGEOMETRYRULES ===========
+
+GlobalGeometryRules,
+    UpperLeftCorner,         !- Starting Vertex Position
+    CounterClockWise,        !- Vertex Entry Direction
+    World;                   !- Coordinate System
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ZONE ===========
+
+Zone,
+    zone_1,                  !- Name
+    0,                       !- Direction of Relative North {deg}
+    0, 0, 0,                            !- X,Y,Z  {m}
+    1,                       !- Type
+    1,                       !- Multiplier
+    4,                       !- Ceiling Height {m}
+    100,                     !- Volume {m3}
+    25;                      !- Floor Area {m2}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: BUILDINGSURFACE:DETAILED ===========
+
+BuildingSurface:Detailed,
+    surface_exterior_1,      !- Name
+    Wall,                    !- Surface Type
+    validation_wall_no_mass, !- Construction Name
+    zone_1,                  !- Zone Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    0.5000000,               !- View Factor to Ground
+    4,                       !- Number of Vertices
+    0, 0, 4,                            !- X,Y,Z  1 {m}
+    0, 0, 0,                            !- X,Y,Z  2 {m}
+    5, 0, 0,                            !- X,Y,Z  3 {m}
+    5, 0, 4;                            !- X,Y,Z  4 {m}
+
+BuildingSurface:Detailed,
+    surface_exterior_2,      !- Name
+    Wall,                    !- Surface Type
+    validation_wall_no_mass, !- Construction Name
+    zone_1,                  !- Zone Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    0.5000000,               !- View Factor to Ground
+    4,                       !- Number of Vertices
+    5, 0, 4,                            !- X,Y,Z  1 {m}
+    5, 0, 0,                            !- X,Y,Z  2 {m}
+    5, 5, 0,                            !- X,Y,Z  3 {m}
+    5, 5, 4;                            !- X,Y,Z  4 {m}
+
+BuildingSurface:Detailed,
+    surface_exterior_3,      !- Name
+    Wall,                    !- Surface Type
+    validation_wall_no_mass, !- Construction Name
+    zone_1,                  !- Zone Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    0.5000000,               !- View Factor to Ground
+    4,                       !- Number of Vertices
+    5, 5, 4,                            !- X,Y,Z  1 {m}
+    5, 5, 0,                            !- X,Y,Z  2 {m}
+    0, 5, 0,                            !- X,Y,Z  3 {m}
+    0, 5, 4;                            !- X,Y,Z  4 {m}
+
+BuildingSurface:Detailed,
+    surface_exterior_4,      !- Name
+    Wall,                    !- Surface Type
+    validation_wall_no_mass, !- Construction Name
+    zone_1,                  !- Zone Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    0.5000000,               !- View Factor to Ground
+    4,                       !- Number of Vertices
+    0, 5, 4,                            !- X,Y,Z  1 {m}
+    0, 5, 0,                            !- X,Y,Z  2 {m}
+    0, 0, 0,                            !- X,Y,Z  3 {m}
+    0, 0, 4;                            !- X,Y,Z  4 {m}
+
+BuildingSurface:Detailed,
+    surface_floor,           !- Name
+    Floor,                   !- Surface Type
+    validation_floor,        !- Construction Name
+    zone_1,                  !- Zone Name
+    Adiabatic,               !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    1.000000,                !- View Factor to Ground
+    4,                       !- Number of Vertices
+    5, 0.000000, 0.0,                   !- X,Y,Z  1 {m}
+    0.000000, 0.000000, 0.0,            !- X,Y,Z  2 {m}
+    0.000000, 5, 0.0,                   !- X,Y,Z  3 {m}
+    5, 5, 0.0;                          !- X,Y,Z  4 {m}
+
+BuildingSurface:Detailed,
+    surface_roof,            !- Name
+    Roof,                    !- Surface Type
+    validation_roof_no_mass, !- Construction Name
+    zone_1,                  !- Zone Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    0,                       !- View Factor to Ground
+    4,                       !- Number of Vertices
+    0.000000, 5, 4,                     !- X,Y,Z  1 {m}
+    0.000000, 0.000000, 4,              !- X,Y,Z  2 {m}
+    5, 0.000000, 4,                     !- X,Y,Z  3 {m}
+    5, 5, 4;                            !- X,Y,Z  4 {m}
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OTHEREQUIPMENT ===========
+
+OtherEquipment,
+    hvac_generic,            !- Name
+    None,                    !- Fuel Type
+    zone_1,                  !- Zone or ZoneList Name
+    hvac_generic,            !- Schedule Name
+    EquipmentLevel,          !- Design Level Calculation Method
+    -200,                    !- Design Level {W}
+    ,                        !- Power per Zone Floor Area {W/m2}
+    ,                        !- Power per Person {W/person}
+    0,                       !- Fraction Latent
+    0,                       !- Fraction Radiant
+    0;                       !- Fraction Lost
+
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLEDICTIONARY ===========
+
+Output:VariableDictionary,IDF;
+
+!-   ===========  ALL OBJECTS IN CLASS: OUTPUT:VARIABLE ===========
+
+Output:Variable,*,Surface Outside Face Conduction Heat Transfer Rate per Area,Timestep;
+Output:Variable,*,Surface Inside Face Conduction Heat Transfer Rate per Area,Timestep;
+Output:Variable,*,Surface Inside Face Temperature,Timestep;
+Output:Variable,*,Surface Inside Face Convection Heat Gain Rate per Area,Timestep;
+Output:Variable,*,Site Ground Temperature,Timestep;
+Output:Variable,*,Surface Outside Face Temperature,Timestep;
+Output:Variable,*,Surface Outside Face Incident Solar Radiation Rate per Area,Timestep;
+Output:Variable,*,Site Outdoor Air Humidity Ratio,Timestep;
+Output:Variable,*,Site Sky Temperature,Timestep;
+Output:Variable,*,Site Outdoor Air Drybulb Temperature,Timestep;
+Output:Variable,*,Zone Mean Air Temperature,Timestep;
+Output:Variable,*,Other Equipment Total Heating Energy,Timestep;
