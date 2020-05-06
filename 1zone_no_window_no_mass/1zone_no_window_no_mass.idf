@@ -24,7 +24,7 @@ SimulationControl,
 !-   ===========  ALL OBJECTS IN CLASS: BUILDING ===========
 
 Building,
-    1zone_no_window_no_mass,  !- Name
+    1zone_no_window_no_mass, !- Name
     0,                       !- North Axis {deg}
     City,                    !- Terrain
     0.04,                    !- Loads Convergence Tolerance Value
@@ -36,11 +36,11 @@ Building,
 
 !-   ===========  ALL OBJECTS IN CLASS: SURFACECONVECTIONALGORITHM:INSIDE ===========
 
-SurfaceConvectionAlgorithm:Inside,TARP;
+SurfaceConvectionAlgorithm:Inside,Simple;
 
 !-   ===========  ALL OBJECTS IN CLASS: SURFACECONVECTIONALGORITHM:OUTSIDE ===========
 
-SurfaceConvectionAlgorithm:Outside,DOE-2;
+SurfaceConvectionAlgorithm:Outside,SimpleCombined;
 
 !-   ===========  ALL OBJECTS IN CLASS: HEATBALANCEALGORITHM ===========
 
