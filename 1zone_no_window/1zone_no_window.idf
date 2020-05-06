@@ -262,7 +262,7 @@ OtherEquipment,
     zone_1,                  !- Zone or ZoneList Name
     hvac_generic,            !- Schedule Name
     EquipmentLevel,          !- Design Level Calculation Method
-    -200,                    !- Design Level {W}
+    0,                       !- Design Level {W}
     ,                        !- Power per Zone Floor Area {W/m2}
     ,                        !- Power per Person {W/person}
     0,                       !- Fraction Latent
