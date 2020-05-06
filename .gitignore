@@ -1,4 +1,11 @@
 
+
+*.DS_Store
+
+*.epg
+
+*.errgrp
+
 *.audit
 
 *.bnd
